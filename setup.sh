@@ -9,7 +9,8 @@
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Create symbolic link in the home dir to our .vimrc file
-ln -s .vimrc ~/.vimrc
+# NOTE: Moving the .vimrc file in the repo will break the symlink
+ln -s $(pwd)/.vimrc ~/.vimrc
 
 # Install Vundle plugins
 vim +PluginInstall +qall 
