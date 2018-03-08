@@ -81,12 +81,15 @@ set autoindent
 set encoding=utf-8
 set shiftwidth=2
 set noshiftround
-set wrap
 
 set showmode
 set showcmd
 
+set completeopt=longest,menuone
+
 set laststatus=2
+set wrap linebreak nolist
+set breakindent
 
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
@@ -116,7 +119,6 @@ nnoremap <F4> :SyntasticToggleMode<CR>
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
@@ -126,11 +128,12 @@ Plugin 'tpope/vim-fugitive' " Git wrapper
 Plugin 'tpope/vim-commentary' " Comment out lines easily
 Plugin 'vim-syntastic/syntastic'
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'pangloss/vim-javascript'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'lifepillar/vim-mucomplete' 
+Plugin 'davidhalter/jedi-vim'
+" LaTeX plugins
 " Plugin 'Chiel92/vim-autoformat'
 " Plugin 'lervag/vimtex'
-
 call vundle#end()
 
 " Color scheme
@@ -142,6 +145,9 @@ colorscheme Tomorrow-Night-Bright
 " let g:solarized_termtrans=0
 let g:airline_theme='materialmonokai'
 let g:materialmonokai_italic=1
+
+" Line number color
+highlight LineNr ctermfg=grey
 
 "Airline settings
 let g:airline_powerline_fonts=1
@@ -162,3 +168,11 @@ let g:gitgutter_highlight_lines=1
 
 " vim-javascript settings
 " let g:javascript_plugin_jsdoc = 1
+
+" mucomplete settings
+set completeopt+=menuone
+set completeopt+=noselect
+set completeopt+=noinsert
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+let g:mucomplete#enable_auto_at_startup = 1
