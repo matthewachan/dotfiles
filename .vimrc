@@ -131,6 +131,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'lifepillar/vim-mucomplete' 
 Plugin 'davidhalter/jedi-vim'
+Plugin 'skielbasa/vim-material-monokai'
 " LaTeX plugins
 " Plugin 'Chiel92/vim-autoformat'
 " Plugin 'lervag/vimtex'
