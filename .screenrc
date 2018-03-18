@@ -1,0 +1,6 @@
+# Enable alternate screen (removes terminal output from vi after closing vi)
+altscreen on
+# Enable 256 color terminal
+term screen-256color
+# Loads bash configs into screen (i.e. aliases and path)
+shell -$SHELL
