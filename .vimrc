@@ -139,11 +139,7 @@ call vundle#end()
 
 " Color scheme
 set background=dark
-" set termguicolors
-" colorscheme material-monokai
 colorscheme Tomorrow-Night-Bright
-" let g:solarized_termcolors=256
-" let g:solarized_termtrans=0
 let g:airline_theme='materialmonokai'
 let g:materialmonokai_italic=1
 
@@ -165,7 +161,7 @@ let g:syntastic_check_on_wq = 0
 
 " GitGutter settings
 set updatetime=250
-let g:gitgutter_highlight_lines=1
+let g:gitgutter_highlight_lines=0
 
 " vim-javascript settings
 " let g:javascript_plugin_jsdoc = 1

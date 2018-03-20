@@ -1,3 +1,6 @@
+# Disable start up message
+startup_message off
+
 # Enable status line
 hardstatus on
 hardstatus alwayslastline
