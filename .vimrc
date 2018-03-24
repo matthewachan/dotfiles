@@ -142,6 +142,7 @@ set background=dark
 colorscheme Tomorrow-Night-Bright
 let g:airline_theme='materialmonokai'
 let g:materialmonokai_italic=1
+set t_Co=256
 
 " Line number color
 highlight LineNr ctermfg=grey

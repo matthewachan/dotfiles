@@ -19,5 +19,7 @@ defbce "on"
 altscreen on
 # Enable 256 color terminal
 term screen-256color
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E38;5;%dm'
+
 # Loads bash configs into screen (i.e. aliases and path)
 shell -$SHELL

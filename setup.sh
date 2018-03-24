@@ -14,6 +14,9 @@ fi
 if [ -e ~/.bashrc ]; then
   mv ~/.bashrc ~/.bashrc_$(date +%Y%m%d%H%M%S%3N)
 fi
+if [ -e ~/.tmux.conf ]; then
+  mv ~/.tmux.conf ~/.tmux.conf_$(date +%Y%m%d%H%M%S%3N)
+fi
 
 # Clone Vundle, our vim package manager
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -23,6 +26,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ln -F -s $(pwd)/.vimrc ~/.vimrc
 ln -F -s $(pwd)/.screenrc ~/.screenrc
 ln -F -s $(pwd)/.bashrc ~/.bashrc
+ln -F -s $(pwd)/.tmux.conf ~/.tmux.conf
 
 # Install Vundle plugins
 vim +PluginInstall +qall 
