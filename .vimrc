@@ -12,7 +12,7 @@ runtime! debian.vim
 " Uncomment the next line to make Vim more Vi-compatible
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
 " options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
+set compatible
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -20,15 +20,11 @@ if has("syntax")
   syntax on
 endif
 
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-set background=dark
-
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
@@ -48,11 +44,11 @@ set hidden      " Hide buffers when they are abandoned
 set mouse=a     " Enable mouse usage (all modes)
 
 " Auto indentation on save
-set smartindent
-augroup autoindent
-  au!
-  autocmd BufWritePre * :normal migg=G`i
-augroup End
+" set smartindent
+" augroup autoindent
+"   au!
+"   autocmd BufWritePre * :normal migg=G`i
+" augroup End
 
 " Set swap file directory
 set directory^=$HOME/.vim/temp//
@@ -62,24 +58,21 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
-" Custom settings
+" Custom settings (Linux kernel development default)
 set number
 set ruler
 
 set splitbelow
 set splitright
 
-set tabstop=4
-set softtabstop=4
-set expandtab
+set tabstop=8
+set softtabstop=8
 
 set hlsearch
 set nocompatible
 
-set autoindent
-
 set encoding=utf-8
-set shiftwidth=2
+set shiftwidth=8
 set noshiftround
 
 set showmode
@@ -89,11 +82,6 @@ set completeopt=longest,menuone
 
 set laststatus=2
 set wrap linebreak nolist
-set breakindent
-
-" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
-" can be called correctly.
-" set shellslash
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
@@ -109,7 +97,7 @@ set breakindent
 " let g:Tex_ViewRule_dvi='yap -1'
 " let g:Tex_DefaultTargetFormat='pdf'
 
-" Key mapping
+" Key mappings
 nnoremap <F1> :NERDTreeFocus<CR>
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :GitGutterToggle<CR>
@@ -129,17 +117,20 @@ Plugin 'tpope/vim-commentary' " Comment out lines easily
 Plugin 'vim-syntastic/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'lifepillar/vim-mucomplete' 
-Plugin 'davidhalter/jedi-vim'
 Plugin 'skielbasa/vim-material-monokai'
+" Plugin 'lifepillar/vim-mucomplete' 
+" Plugin 'davidhalter/jedi-vim'
 " LaTeX plugins
 " Plugin 'Chiel92/vim-autoformat'
 " Plugin 'lervag/vimtex'
 call vundle#end()
 
-" Color scheme
+" If using a dark background within the editing area and syntax highlighting
+" turn on this option as well
 set background=dark
-colorscheme Tomorrow-Night-Bright
+
+" Color scheme settings
+colorscheme default
 let g:airline_theme='materialmonokai'
 let g:materialmonokai_italic=1
 set t_Co=256
@@ -168,9 +159,9 @@ let g:gitgutter_highlight_lines=0
 " let g:javascript_plugin_jsdoc = 1
 
 " mucomplete settings
-set completeopt+=menuone
-set completeopt+=noselect
-set completeopt+=noinsert
-set shortmess+=c   " Shut off completion messages
-set belloff+=ctrlg " If Vim beeps during completion
-let g:mucomplete#enable_auto_at_startup = 1
+" set completeopt+=menuone
+" set completeopt+=noselect
+" set completeopt+=noinsert
+" set shortmess+=c   " Shut off completion messages
+" set belloff+=ctrlg " If Vim beeps during completion
+" let g:mucomplete#enable_auto_at_startup = 1
