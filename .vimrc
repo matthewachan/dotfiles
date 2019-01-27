@@ -12,7 +12,7 @@ runtime! debian.vim
 " Uncomment the next line to make Vim more Vi-compatible
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
 " options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
+set compatible
 
 " #### Some cool optional stuff
 fun! OCaml_additional()
@@ -29,15 +29,11 @@ if has("syntax")
   syntax on
 endif
 
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-set background=dark
-
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
@@ -71,7 +67,7 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
-" Custom settings
+" Custom settings (Linux kernel development default)
 set number
 set ruler
 
@@ -121,7 +117,7 @@ let g:livepreview_previewer = 'open -a Skim'
 " let g:Tex_ViewRule_dvi='yap -1'
 " let g:Tex_DefaultTargetFormat='pdf'
 
-" Key mapping
+" Key mappings
 nnoremap <F1> :NERDTreeFocus<CR>
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :GitGutterToggle<CR>
@@ -141,17 +137,19 @@ Plugin 'tpope/vim-commentary' " Comment out lines easily
 Plugin 'vim-syntastic/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'lifepillar/vim-mucomplete' 
-Plugin 'davidhalter/jedi-vim'
 Plugin 'skielbasa/vim-material-monokai'
+" Plugin 'lifepillar/vim-mucomplete' 
+" Plugin 'davidhalter/jedi-vim'
 " LaTeX plugins
-" Plugin 'lervag/vimtex'
 Plugin 'xuhdev/vim-latex-live-preview'
 call vundle#end()
 
-" Color scheme
+" If using a dark background within the editing area and syntax highlighting
+" turn on this option as well
 set background=dark
-colorscheme Tomorrow-Night-Bright
+
+" Color scheme settings
+colorscheme default
 let g:airline_theme='materialmonokai'
 let g:materialmonokai_italic=1
 set t_Co=256
@@ -180,9 +178,9 @@ let g:gitgutter_highlight_lines=0
 " let g:javascript_plugin_jsdoc = 1
 
 " mucomplete settings
-set completeopt+=menuone
-set completeopt+=noselect
-set completeopt+=noinsert
-set shortmess+=c   " Shut off completion messages
-set belloff+=ctrlg " If Vim beeps during completion
-let g:mucomplete#enable_auto_at_startup = 0
+" set completeopt+=menuone
+" set completeopt+=noselect
+" set completeopt+=noinsert
+" set shortmess+=c   " Shut off completion messages
+" set belloff+=ctrlg " If Vim beeps during completion
+" let g:mucomplete#enable_auto_at_startup = 1
