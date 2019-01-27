@@ -104,6 +104,3 @@ fi
 
 # Terminal color settings
 export TERM=xterm-256color
-
-
-

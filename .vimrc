@@ -14,6 +14,15 @@ runtime! debian.vim
 " options, so any other options should be set AFTER setting 'compatible'.
 "set compatible
 
+" #### Some cool optional stuff
+fun! OCaml_additional()
+    " For the plugin 'tpope/vim-commentary':
+    set commentstring=(*\ %s\ *)
+endfun
+autocmd FileType ocaml call OCaml_additional()
+" Increase refresh frequency for latex live preview plugin
+autocmd Filetype text setl updatetime=1
+
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 if has("syntax")
@@ -48,11 +57,11 @@ set hidden      " Hide buffers when they are abandoned
 set mouse=a     " Enable mouse usage (all modes)
 
 " Auto indentation on save
-set smartindent
-augroup autoindent
-  au!
-  autocmd BufWritePre * :normal migg=G`i
-augroup End
+" set smartindent
+" augroup autoindent
+"   au!
+"   autocmd BufWritePre * :normal migg=G`i
+" augroup End
 
 " Set swap file directory
 set directory^=$HOME/.vim/temp//
@@ -69,17 +78,17 @@ set ruler
 set splitbelow
 set splitright
 
-set tabstop=4
-set softtabstop=4
-set expandtab
+set tabstop=8
+set softtabstop=8
+" set expandtab
 
 set hlsearch
 set nocompatible
 
-set autoindent
+" set autoindent
 
 set encoding=utf-8
-set shiftwidth=2
+set shiftwidth=8
 set noshiftround
 
 set showmode
@@ -89,7 +98,7 @@ set completeopt=longest,menuone
 
 set laststatus=2
 set wrap linebreak nolist
-set breakindent
+" set breakindent
 
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
@@ -105,6 +114,9 @@ set breakindent
 " The following changes the default filetype back to 'tex':
 " let g:tex_flavor='latex'
 " let g:Tex_ViewRule_pdf='AcroRd32'
+let g:livepreview_previewer = 'open -a Skim'
+
+" let g:Tex_ViewRule_pdf='open'
 " let g:Tex_ViewRule_ps='gsview32'
 " let g:Tex_ViewRule_dvi='yap -1'
 " let g:Tex_DefaultTargetFormat='pdf'
@@ -133,8 +145,8 @@ Plugin 'lifepillar/vim-mucomplete'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'skielbasa/vim-material-monokai'
 " LaTeX plugins
-" Plugin 'Chiel92/vim-autoformat'
 " Plugin 'lervag/vimtex'
+Plugin 'xuhdev/vim-latex-live-preview'
 call vundle#end()
 
 " Color scheme
@@ -173,4 +185,4 @@ set completeopt+=noselect
 set completeopt+=noinsert
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
-let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#enable_auto_at_startup = 0
