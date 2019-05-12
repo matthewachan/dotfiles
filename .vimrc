@@ -1,186 +1,97 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by
-" the call to :runtime you can find below.  If you wish to change any of those
-" settings, you should do it in this file (/etc/vim/vimrc), since debian.vim
-" will be overwritten everytime an upgrade of the vim packages is performed.
-" It is recommended to make changes after sourcing debian.vim since it alters
-" the value of the 'compatible' option.
-
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-set compatible
+syntax on	" Syntax highlighting
 
-" #### Some cool optional stuff
-fun! OCaml_additional()
-    " For the plugin 'tpope/vim-commentary':
-    set commentstring=(*\ %s\ *)
-endfun
-autocmd FileType ocaml call OCaml_additional()
-" Increase refresh frequency for latex live preview plugin
-autocmd Filetype text setl updatetime=1
-
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-if has("syntax")
-  syntax on
-endif
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent on
-endif
-
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-set showcmd     " Show (partial) command in status line.
-set showmatch       " Show matching brackets.
-set ignorecase      " Do case insensitive matching
-set smartcase       " Do smart case matching
-set incsearch       " Incremental search
-set autowrite       " Automatically save before commands like :next and :make
-set hidden      " Hide buffers when they are abandoned
-set mouse=a     " Enable mouse usage (all modes)
-
-" Auto indentation on save
-" set smartindent
-" augroup autoindent
-"   au!
-"   autocmd BufWritePre * :normal migg=G`i
-" augroup End
-
-" Set swap file directory
-set directory^=$HOME/.vim/temp//
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
+set showcmd	" Show (partial) command in status line.
+set showmatch	" Show matching brackets.
+set ignorecase	" Do case insensitive matching
+set smartcase	" Do smart case matching
+set incsearch	" Incremental search
+set autowrite	" Automatically save before commands like :next and :make
+set hidden	" Hide buffers when they are abandoned
 
 " Custom settings (Linux kernel development default)
 set number
 set ruler
-
-set splitbelow
-set splitright
-
 set tabstop=8
 set softtabstop=8
-" set expandtab
-
+set splitbelow
+set splitright
 set hlsearch
-set nocompatible
-
-" set autoindent
-
 set encoding=utf-8
 set shiftwidth=8
 set noshiftround
-
 set showmode
-set showcmd
-
 set completeopt=longest,menuone
-
 set laststatus=2
 set wrap linebreak nolist
-" set breakindent
-
-" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
-" can be called correctly.
-" set shellslash
-
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-" set grepprg=grep\ -nH\ $*
-
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-" let g:tex_flavor='latex'
-" let g:Tex_ViewRule_pdf='AcroRd32'
-let g:livepreview_previewer = 'open -a Skim'
-
-" let g:Tex_ViewRule_pdf='open'
-" let g:Tex_ViewRule_ps='gsview32'
-" let g:Tex_ViewRule_dvi='yap -1'
-" let g:Tex_DefaultTargetFormat='pdf'
+set backspace=indent,eol,start
 
 " Key mappings
 nnoremap <F1> :NERDTreeFocus<CR>
 nnoremap <F2> :NERDTreeToggle<CR>
-nnoremap <F3> :GitGutterToggle<CR>
+" nnoremap <F3> :GitGutterToggle<CR>
 nnoremap <F4> :SyntasticToggleMode<CR>
 
-" Vundle plugins
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-surround' " Easily work with surrounding parens, quotes, etc.
-Plugin 'tpope/vim-fugitive' " Git wrapper
-Plugin 'tpope/vim-commentary' " Comment out lines easily
-Plugin 'vim-syntastic/syntastic'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'skielbasa/vim-material-monokai'
-" Plugin 'lifepillar/vim-mucomplete' 
-" Plugin 'davidhalter/jedi-vim'
-" LaTeX plugins
-Plugin 'xuhdev/vim-latex-live-preview'
-call vundle#end()
-
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-set background=dark
-
 " Color scheme settings
-colorscheme default
+set background=dark
+colorscheme Monokai
 let g:airline_theme='materialmonokai'
 let g:materialmonokai_italic=1
+let g:airline_powerline_fonts=1
 set t_Co=256
-
 " Line number color
 highlight LineNr ctermfg=grey
 
-"Airline settings
-let g:airline_powerline_fonts=1
+" Plugins
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+	Plugin 'VundleVim/Vundle.vim' " Plugin manager
+	Plugin 'scrooloose/nerdtree' " Filetree inspector
+	Plugin 'vim-airline/vim-airline' " Improved status line
+	Plugin 'vim-airline/vim-airline-themes' " Status line themes
+	Plugin 'tpope/vim-surround' " Shortcuts for surrounding quotes and parens 
+	Plugin 'tpope/vim-fugitive' " Git wrapper
+	Plugin 'tpope/vim-commentary' " Comment out lines easily
+	Plugin 'vim-syntastic/syntastic' " Syntax checker
+	Plugin 'airblade/vim-gitgutter' " Visual markers for modified lines
+	Plugin 'flazz/vim-colorschemes' " Additional color schemes
+	Plugin 'skielbasa/vim-material-monokai' " Material design monokai theme
+	Plugin 'xuhdev/vim-latex-live-preview' " Live preview LaTeX documents
+	Plugin 'Valloric/YouCompleteMe' " Code completion
+	Plugin 'sheerun/vim-polyglot' " Better syntax highlighting
+call vundle#end()
 
 " Recommended Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+" YouCompleteMe settings
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " GitGutter settings
 set updatetime=250
 let g:gitgutter_highlight_lines=0
 
-" vim-javascript settings
-" let g:javascript_plugin_jsdoc = 1
+" Specify comment strings for other languages and filetypes
+fun! OCaml_comment()
+    set commentstring=(*\ %s\ *)
+endfun
+fun! Shell_comment()
+    set commentstring=#\ %s
+endfun
+autocmd FileType ocaml call OCaml_comment()
+autocmd FileType sh call Shell_comment()
+" Increase refresh frequency for latex live preview plugin
+autocmd Filetype tex setl updatetime=1
 
-" mucomplete settings
-" set completeopt+=menuone
-" set completeopt+=noselect
-" set completeopt+=noinsert
-" set shortmess+=c   " Shut off completion messages
-" set belloff+=ctrlg " If Vim beeps during completion
-" let g:mucomplete#enable_auto_at_startup = 1
+" Set swap file directory
+set directory^=$HOME/.vim/temp/
