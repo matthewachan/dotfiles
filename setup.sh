@@ -52,6 +52,8 @@ cmake --build . --target _regex --config Release
 sudo apt install -y zsh wget git
 chsh -s $(which zsh)
 
+sudo apt-get install -y fonts-powerline
+
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
