@@ -1,10 +1,10 @@
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
+runtime! debian.vim " Source config settings (if available)
+colorscheme Monokai
 
 syntax on	" Syntax highlighting
 
 set showcmd	" Show (partial) command in status line.
+set autoindent	" Auto-indent newlines
 set showmatch	" Show matching brackets.
 set ignorecase	" Do case insensitive matching
 set smartcase	" Do smart case matching
@@ -16,13 +16,19 @@ set clipboard=unnamed
 " Custom settings (Linux kernel development default)
 set number
 set ruler
-set tabstop=8
-set softtabstop=8
+let indent=4
+let &tabstop=indent
+let &softtabstop=indent
+let &shiftwidth=indent
+set expandtab
+
+hi Search ctermbg=blue ctermfg=green term=none " Highlight preferences
+
 set splitbelow
 set splitright
+
 set hlsearch
 set encoding=utf-8
-set shiftwidth=8
 set noshiftround
 set showmode
 set completeopt=longest,menuone
@@ -38,7 +44,6 @@ nnoremap <F4> :SyntasticToggleMode<CR>
 
 " Color scheme settings
 set background=dark
-colorscheme Monokai
 let g:airline_theme='materialmonokai'
 let g:materialmonokai_italic=1
 let g:airline_powerline_fonts=1
@@ -64,6 +69,7 @@ call vundle#begin()
 	Plugin 'xuhdev/vim-latex-live-preview' " Live preview LaTeX documents
 	Plugin 'Valloric/YouCompleteMe' " Code completion
 	Plugin 'sheerun/vim-polyglot' " Better syntax highlighting
+	Plugin 'JamshedVesuna/vim-markdown-preview' " Live preview for Markdown documents
 call vundle#end()
 
 " Recommended Syntastic settings
@@ -82,6 +88,13 @@ let g:ycm_server_python_interpreter = '/usr/bin/python'
 set updatetime=250
 let g:gitgutter_highlight_lines=0
 
+" Vim Markdown Preview settings
+let vim_markdown_preview_browser='Google Chrome'
+let vim_markdown_preview_github=1
+
+" Specify program used by LaTeX Live Preview
+let g:livepreview_previewer = 'open -a Skim'
+
 " Specify comment strings for other languages and filetypes
 fun! OCaml_comment()
     set commentstring=(*\ %s\ *)
@@ -89,10 +102,14 @@ endfun
 fun! Shell_comment()
     set commentstring=#\ %s
 endfun
+fun! Tex_comment()
+    set commentstring=%\ %s
+endfun
+
+set formatoptions+=ro " Automatically add comment text on newline
 autocmd FileType ocaml call OCaml_comment()
 autocmd FileType sh call Shell_comment()
-" Increase refresh frequency for latex live preview plugin
-autocmd Filetype tex setl updatetime=1
+autocmd FileType tex,st call Tex_comment()
 
 " Set swap file directory
 set directory^=$HOME/.vim/temp/
